@@ -1,10 +1,342 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>管理员模块</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>风险态势</title>
+    <meta charset="utf-8">
+    <!--  css  -->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/page_admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/wx916.css}"/>
+    <!-- jquery脚本 -->
+    <script type="text/javascript" th:src="@{/static/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/echarts/echarts.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/echarts/map/world.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/page_admin.js}"></script>
+
 </head>
 <body>
-管理员模块（管理员可访问）
+<div class="wx-container">
+    <header class="wx-header">
+        <div class="wx-header-item col-md-4">
+            <div class="wx-logo"></div>
+            <p class="wx-page-title">系统</p>
+        </div>
+        <div class="wx-header-item col-md-4">
+            <p class="wx-title">网络安全协调指挥平台</p>
+        </div>
+    </header>
+    <section class="wx-section">
+        <div class="mian-container">
+            <div class="page-content">
+                <div class="middle-setion">
+                    <div class="col-md-2" style="min-width: 200px;">
+
+                        <div class=" big-border normal-box fill-bg" style="height:130px;margin-bottom: 10px;">
+                            <div class="big-title"><span class="title-item color02"></span>主机</div>
+                            <div class="data-box user-box">
+                                <i class="iconfont iconzhujijiankong"></i>
+                                <span>1987</span>
+                            </div>
+                        </div>
+                        <div class=" big-border normal-box fill-bg" style="height:calc(100% - 130px)">
+                            <div class="big-title"><span class="title-item color02"></span>绑定关系</div>
+                            <div class="data-box" style="overflow: auto;">
+
+                                <div class="one-host" id="host1"></div>
+                                <div class="one-host" id="host2"></div>
+                                <div class="one-host" id="host3"></div>
+                                <div class="one-host" id="host4"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8">
+                        <div class="normal-box">
+                            <div class="save-area-status">
+                            </div>
+                            <div class="data-box" id="worldMap">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="min-width: 200px;">
+                        <div class=" big-border normal-box fill-bg" style="margin-bottom: 10px;height: 130px;">
+                            <div class="big-title"><span class="title-item color02"></span>用户</div>
+
+                            <div class="data-box user-box">
+                                <i class="iconfont iconzhanghu"></i>
+                                <span id="userCount">1987</span>
+                            </div>
+                        </div>
+                        <div class="big-border normal-box fill-bg" style="height:calc(100% - 130px)">
+                            <div class="big-title"><span class="title-item color02"></span>攻击详情</div>
+
+                            <div class="data-box" style="overflow: auto;padding-top: 15px;">
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">128K</span>
+                                        <p>7天</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">2497</span>
+                                        <p>24小时</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">352</span>
+                                        <p>一小时</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">60</span>
+                                        <p>30分钟</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">12</span>
+                                        <p>15分钟</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="bottom-setion">
+                    <div class="col-md-2" style="min-width: 200px;">
+                        <div class="normal-box big-border fill-bg">
+                            <div class="big-title">
+                                <span class="title-item color02"></span>虚机类型
+                            </div>
+                            <div class="data-box" id="machineType">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="normal-box big-border fill-bg">
+                            <div class="big-title"><span class="title-item color02"></span>服务链</div>
+
+                            <!-- <div class="data-box" id=""> -->
+                            <div class="echartTable">
+                                <div class="table_tit">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td width="15%">租户名称</td>
+                                            <td width="17%">服务链名称</td>
+                                            <td width="12%">类型</td>
+                                            <td width="9%">HA</td>
+                                            <td width="10%">状态</td>
+                                            <td width="18%">起始域速率</td>
+                                            <td width="18%">目的域速率</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table_cont">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tbody>
+
+                                        <tr>
+                                            <td width="15%"><i></i>XX租户</td>
+                                            <td width="17%">WAF</td>
+                                            <td width="12%">类型</td>
+                                            <td width="9%">是</td>
+                                            <td width="10%">状态</td>
+                                            <td width="18%">13</td>
+                                            <td width="18%">24</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="15%"><i></i>XX租户</td>
+                                            <td width="17%">WAF</td>
+                                            <td width="12%">类型</td>
+                                            <td width="9%">是</td>
+                                            <td width="10%">状态</td>
+                                            <td width="18%">13</td>
+                                            <td width="18%">24</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="15%"><i></i>XX租户</td>
+                                            <td width="17%">WAF</td>
+                                            <td width="12%">类型</td>
+                                            <td width="9%">是</td>
+                                            <td width="10%">状态</td>
+                                            <td width="18%">13</td>
+                                            <td width="18%">24</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="15%"><i></i>XX租户</td>
+                                            <td width="17%">WAF</td>
+                                            <td width="12%">类型</td>
+                                            <td width="9%">是</td>
+                                            <td width="10%">状态</td>
+                                            <td width="18%">13</td>
+                                            <td width="18%">24</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="normal-box big-border fill-bg">
+                            <div class="big-title"><span class="title-item color02"></span>安全域</div>
+
+                            <!-- <div class="data-box" id=""> -->
+                            <div class="echartTable">
+                                <div class="table_tit">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td width="20%">名称</td>
+                                            <td width="20%">租户</td>
+                                            <td width="20%">路由</td>
+                                            <td width="20%">创建时间</td>
+                                            <td width="20%">描述</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table_cont">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tbody>
+
+                                        <tr>
+                                            <td width="20%">server</td>
+                                            <td width="20%">XX租户</td>
+                                            <td width="20%">XX路由</td>
+                                            <td width="20%">2020-06-11</td>
+                                            <td width="20%">这是描述</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="20%">client</td>
+                                            <td width="20%">XX租户</td>
+                                            <td width="20%">XX路由</td>
+                                            <td width="20%">2020-06-11</td>
+                                            <td width="20%">这是描述</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="20%">client</td>
+                                            <td width="20%">XX租户</td>
+                                            <td width="20%">XX路由</td>
+                                            <td width="20%">2020-06-11</td>
+                                            <td width="20%">这是描述</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="20%">server</td>
+                                            <td width="20%">XX租户</td>
+                                            <td width="20%">XX路由</td>
+                                            <td width="20%">2020-06-11</td>
+                                            <td width="20%">这是描述</td>
+                                        </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="min-width: 200px;">
+                        <div class="normal-box big-border fill-bg">
+                            <div class="big-title"><span class="title-item color02"></span>安全产品</div>
+
+                            <div class="data-box" id="safeProduct">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade wx-navmodal" id="wx-bmapmodal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document" style="width: 70%; ">
+                    <div class="modal-content"
+                         style="background: #032845;color: #fff;border: 1px solid #015292;height: 500px;">
+                        <div class="modal-header" style=" border-bottom: 1px solid #074473;">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                            <h4 class="modal-title" id="myModalLabel">用户详情</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-expandable" id="userTable">
+                                <thead>
+                                <tr>
+                                    <th style="width: 50px;"></th>
+                                    <th>用户账号</th>
+                                    <th>姓名</th>
+                                    <th>状态</th>
+                                </tr>
+                                </thead>
+                                <tbody id="">
+                                <tr>
+                                    <td style="width: 50px;font-weight: bold;" class="showTableInner">+</td>
+                                    <td>sysadmin</td>
+                                    <td>sys用户</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px;font-weight: bold;" class="showTableInner">+</td>
+                                    <td>useradmin</td>
+                                    <td>user用户</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px;font-weight: bold;" class="showTableInner">+</td>
+                                    <td>abc</td>
+                                    <td>普通用户</td>
+                                    <td>正常</td>
+                                </tr>
+
+
+                                <!--  -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 </body>
 </html>

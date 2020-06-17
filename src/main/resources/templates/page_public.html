@@ -1,10 +1,306 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>公共模块</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>风险态势</title>
+    <meta charset="utf-8">
+    <!--  css  -->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/page_public.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/wx916.css}"/>
+    <!-- jquery脚本 -->
+    <script type="text/javascript" th:src="@{/static/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/echarts/echarts.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/echarts/map/world.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/page_public.js}"></script>
 </head>
 <body>
-公共模块（管理员、领导、员工均可访问）
+<div class="wx-container">
+    <header class="wx-header">
+        <div class="wx-header-item col-md-4">
+            <div class="wx-logo"></div>
+            <p class="wx-page-title">系统</p>
+        </div>
+        <div class="wx-header-item col-md-4">
+            <p class="wx-title">网络安全协调指挥平台</p>
+        </div>
+    </header>
+    <section class="wx-section">
+        <div class="mian-container">
+            <div class="page-content">
+                <div class="middle-setion">
+                    <div class="col-md-3">
+
+                        <div class=" big-border normal-box fill-bg" style="height:130px;margin-bottom: 10px;">
+                            <div class="big-title"><span class="title-item color02"></span>虚机监控概览</div>
+                            <div class="data-box data-overview">
+
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont iconshebei"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">19</span>
+                                        <p>监控设备数</p>
+                                    </div>
+                                </div>
+
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont iconxitongkeyongxing"></i>
+                                    </div>
+                                    <div class="box1-item-r">
+                                        <span class="">89%</span>
+                                        <p>设备可用率</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongaojingzhongxin"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">34</span>
+                                        <p>性能告警数</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class=" big-border normal-box fill-bg" style="height:calc(50% - 70px);margin-bottom: 10px;">
+                            <div class="big-title"><span class="title-item color02"></span>存储空间利用率TOP5</div>
+                            <div class="data-box" id="spaceTop5">
+
+                            </div>
+                        </div>
+                        <div class=" big-border normal-box fill-bg" style="height:calc(50% - 70px)">
+                            <div class="big-title"><span class="title-item color02"></span>告警趋势</div>
+                            <div class="data-box" id="chart04">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-7">
+                        <div class="normal-box">
+                            <div class="save-area-status">
+                            </div>
+                            <div class="data-box" id="worldMap">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="min-width: 200px;float: right;">
+                        <div class=" big-border normal-box fill-bg" style="margin-bottom: 10px;height: 130px;">
+                            <div class="big-title"><span class="title-item color02"></span>告警</div>
+
+                            <div class="data-box user-box">
+                                <i class="iconfont icongaojingzhongxin"></i>
+                                <span>1987</span>
+                            </div>
+                        </div>
+                        <div class="big-border normal-box fill-bg" style="height:calc(100% - 130px)">
+                            <div class="big-title"><span class="title-item color02"></span>攻击详情</div>
+
+                            <div class="data-box" style="overflow: auto;padding-top: 15px;">
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">128K</span>
+                                        <p>7天</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">2497</span>
+                                        <p>24小时</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">352</span>
+                                        <p>一小时</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">60</span>
+                                        <p>30分钟</p>
+                                    </div>
+                                </div>
+                                <div class="box1-item" data-id="0">
+                                    <div class="box1-item-l ">
+                                        <i class="iconfont icongongji"></i>
+                                    </div>
+                                    <div class="box1-item-r ">
+                                        <span class="">12</span>
+                                        <p>15分钟</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="bottom-setion">
+
+                    <div class="col-md-7">
+                        <div class="normal-box big-border fill-bg normal-box-table">
+                            <div class="big-title"><span class="title-item color02"></span>防火墙日志信息</div>
+
+                            <!-- <div class="data-box" id=""> -->
+                            <div class="echartTable">
+                                <div class="table_tit">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tbody><tr>
+                                            <td width="12%">发送IP</td>
+                                            <td width="12%">源IP</td>
+                                            <td width="6%">源端口</td>
+                                            <td width="12%">目的IP</td>
+                                            <td width="6%">目的端口</td>
+                                            <td width="7%">威胁名称</td>
+                                            <td width="7%">威胁类型</td>
+                                            <td width="7%">协议名称</td>
+                                            <td width="15%">mac地址</td>
+                                            <td width="7%">攻击次数</td>
+                                            <td width="9%">日志级别</td>
+
+
+
+                                        </tr>
+                                        </tbody></table>
+                                </div>
+                                <div class="table_cont">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tbody>
+
+                                        <tr>
+                                            <td width="12%">192.168.19.58</td>
+                                            <td width="12%">192.168.19.90</td>
+                                            <td width="6%">8843</td>
+                                            <td width="12%">10.1.1.23</td>
+                                            <td width="6%">4399</td>
+                                            <td width="7%">威胁一</td>
+                                            <td width="7%">XX威胁</td>
+                                            <td width="7%">XX协议</td>
+                                            <td width="15%">XXmac地址</td>
+                                            <td width="7%">98</td>
+                                            <td width="9%">低</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="12%">192.168.19.58</td>
+                                            <td width="12%">192.168.19.90</td>
+                                            <td width="6%">8843</td>
+                                            <td width="12%">10.1.1.23</td>
+                                            <td width="6%">4399</td>
+                                            <td width="7%">威胁一</td>
+                                            <td width="7%">XX威胁</td>
+                                            <td width="7%">XX协议</td>
+                                            <td width="15%">XXmac地址</td>
+                                            <td width="7%">98</td>
+                                            <td width="9%">低</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="12%">192.168.19.58</td>
+                                            <td width="12%">192.168.19.90</td>
+                                            <td width="6%">8843</td>
+                                            <td width="12%">10.1.1.23</td>
+                                            <td width="6%">4399</td>
+                                            <td width="7%">威胁一</td>
+                                            <td width="7%">XX威胁</td>
+                                            <td width="7%">XX协议</td>
+                                            <td width="15%">XXmac地址</td>
+                                            <td width="7%">98</td>
+                                            <td width="9%">低</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="12%">192.168.19.58</td>
+                                            <td width="12%">192.168.19.90</td>
+                                            <td width="6%">8843</td>
+                                            <td width="12%">10.1.1.23</td>
+                                            <td width="6%">4399</td>
+                                            <td width="7%">威胁一</td>
+                                            <td width="7%">XX威胁</td>
+                                            <td width="7%">XX协议</td>
+                                            <td width="15%">XXmac地址</td>
+                                            <td width="7%">98</td>
+                                            <td width="9%">低</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="12%">192.168.19.58</td>
+                                            <td width="12%">192.168.19.90</td>
+                                            <td width="6%">8843</td>
+                                            <td width="12%">10.1.1.23</td>
+                                            <td width="6%">4399</td>
+                                            <td width="7%">威胁一</td>
+                                            <td width="7%">XX威胁</td>
+                                            <td width="7%">XX协议</td>
+                                            <td width="15%">XXmac地址</td>
+                                            <td width="7%">98</td>
+                                            <td width="9%">低</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="12%">192.168.19.58</td>
+                                            <td width="12%">192.168.19.90</td>
+                                            <td width="6%">8843</td>
+                                            <td width="12%">10.1.1.23</td>
+                                            <td width="6%">4399</td>
+                                            <td width="7%">威胁一</td>
+                                            <td width="7%">XX威胁</td>
+                                            <td width="7%">XX协议</td>
+                                            <td width="15%">XXmac地址</td>
+                                            <td width="7%">98</td>
+                                            <td width="9%">低</td>
+                                        </tr>
+
+
+                                        </tbody></table>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="normal-box big-border fill-bg">
+                            <div class="big-title">
+                                <span class="title-item color02"></span>攻击源TOP10
+                            </div>
+                            <div class="data-box" id="attackIpTop10">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="normal-box big-border fill-bg">
+                            <div class="big-title">
+                                <span class="title-item color02"></span>攻击端口分布
+                            </div>
+                            <div class="data-box" id="machineType">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>

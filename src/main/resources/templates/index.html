@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>系统首页</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/base.css}"/>
+    <script type="text/javascript" th:src="@{/static/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/echarts.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/static/map/js/world.js}"></script>
 </head>
 <body>
-<div th:text="${'欢迎您，' + currentuser}" style="color: red;float: left;"></div>
-<div style="color: red;float: right;"><a href="doLogout">注销</a></div>
+<header>
+    <div th:text="${'欢迎您，' + currentuser}" style="color: white;float: left;"></div>
+    网络安全态势感知和应急指挥平台
+    <div style="float: right;"><a href="doLogout"><span style="color: white;">注销</span></a></div>
+</header>
 <!--
 Thymeleaf中使用Shiro标签，具备授权才能看见
 注意：如果不适用Shiro标签，没有授权的访问将产生401响应吗，执行ErrorPageConfig类 和 ErrorController类处理
@@ -14,5 +23,233 @@ Thymeleaf中使用Shiro标签，具备授权才能看见
 <div style="clear: both;" shiro:hasPermission="user:leaderModule">公共模块：<a href="publicModule">公共模块</a></div>
 <div style="clear: both;" shiro:hasPermission="user:leaderModule">领导模块：<a href="leaderModule">领导模块</a></div>
 <div style="clear: both;" shiro:hasPermission="user:adminModule">管理员模块：<a href="adminModule">管理员模块</a></div>
+
+<!--main-->
+<div class="data_content">
+<!--    <div class="data_time">-->
+<!--        温馨提示: 点击模块后跳转至详情页面。-->
+<!--    </div>-->
+
+    <div class="data_main">
+        <div class="main_left fl">
+            <div class="left_1" style="cursor: pointer;">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    流量态势
+                </div>
+                <div id="chart_left_1" class="chart" style="width:100%;height: 98%;"></div>
+            </div>
+            <div class="left_2" style="cursor: pointer;">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    采集趋势
+                </div>
+                <div id="chart_left_2" class="chart" style="width:100%;height: 98%;"></div>
+            </div>
+            <div class="left_3" style="cursor: pointer;">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    应用协议分布
+                </div>
+                <div id="chart_left_3" class="chart" style="width:100%;height: 98%;"></div>
+            </div>
+            <div class="left_4" style="cursor: pointer;">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    最近一周流量分布
+                </div>
+                <div id="chart_left_4" class="chart" style="width:100%;height: 98%;"></div>
+            </div>
+        </div>
+        <div class="main_center fl">
+            <div class="center_text">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    网络攻击图
+                </div>
+                <div id="chart_map" style="width:100%;height:610px;"></div>
+            </div>
+        </div>
+        <div class="main_right fr">
+            <div class="right_1">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    ......
+                </div>
+                <div id="chart_right_1" class="echart" style="width:100%;height: 98%;"></div>
+            </div>
+            <div class="right_2">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    实时访问拓扑
+                </div>
+                <div id="chart_right_2" class="echart" style="width:100%;height: 98%;"></div>
+            </div>
+            <div class="right_3">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    会话分析
+                </div>
+                <div id="chart_right_3" class="echart" style="width:100%;height: 98%;cursor: pointer;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 </body>
 </html>

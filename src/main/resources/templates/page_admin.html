@@ -19,7 +19,7 @@
     <script type="text/javascript" th:src="@{/static/js/page_admin.js}"></script>
 
 </head>
-<body>
+<body id="content">
 <div class="wx-container">
     <header class="wx-header">
         <div class="wx-header-item col-md-4">
@@ -28,6 +28,10 @@
         </div>
         <div class="wx-header-item col-md-4">
             <p class="wx-title">网络安全协调指挥平台</p>
+        </div>
+        <div>
+            <button id="btn">全屏</button>
+            <button id="close">退出</button>
         </div>
     </header>
     <section class="wx-section">
@@ -220,7 +224,7 @@
                             <div class="echartTable">
                                 <div class="table_tit">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tbody>
+                                        <thead>
                                         <tr>
                                             <td width="20%">名称</td>
                                             <td width="20%">租户</td>
@@ -228,46 +232,12 @@
                                             <td width="20%">创建时间</td>
                                             <td width="20%">描述</td>
                                         </tr>
-                                        </tbody>
+                                        </thead>
                                     </table>
                                 </div>
                                 <div class="table_cont">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tbody>
-
-                                        <tr>
-                                            <td width="20%">server</td>
-                                            <td width="20%">XX租户</td>
-                                            <td width="20%">XX路由</td>
-                                            <td width="20%">2020-06-11</td>
-                                            <td width="20%">这是描述</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="20%">client</td>
-                                            <td width="20%">XX租户</td>
-                                            <td width="20%">XX路由</td>
-                                            <td width="20%">2020-06-11</td>
-                                            <td width="20%">这是描述</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="20%">client</td>
-                                            <td width="20%">XX租户</td>
-                                            <td width="20%">XX路由</td>
-                                            <td width="20%">2020-06-11</td>
-                                            <td width="20%">这是描述</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="20%">server</td>
-                                            <td width="20%">XX租户</td>
-                                            <td width="20%">XX路由</td>
-                                            <td width="20%">2020-06-11</td>
-                                            <td width="20%">这是描述</td>
-                                        </tr>
-
-
+                                        <tbody id="securityDomainTable">
                                         </tbody>
                                     </table>
                                 </div>
